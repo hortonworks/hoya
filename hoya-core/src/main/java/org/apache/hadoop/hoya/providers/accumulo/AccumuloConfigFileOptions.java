@@ -55,7 +55,7 @@ public interface AccumuloConfigFileOptions {
   String TRACE_PORT_CLIENT = "trace.port.client";
   String TRACE_PORT_CLIENT_DEFAULT = "12234";
 
-  String TSERV_PORT_CLIENT = "trace.port.client";
+  String TSERV_PORT_CLIENT = "tserver.port.client";
   String TSERV_PORT_CLIENT_DEFAULT = "9997";
   
 }
