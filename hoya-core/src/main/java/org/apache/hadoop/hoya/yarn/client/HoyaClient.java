@@ -375,7 +375,9 @@ public class HoyaClient extends CompoundLaunchedService implements RunService,
                               PRINTF_E_ALREADY_EXISTS, clustername,
                               clusterSpecPath);
     }
-    
+    fs.mkdirs(origConfPath);
+    fs.mkdirs(generatedConfPath);
+
     Configuration conf = getConfig();
     // build up the initial cluster specification
     ClusterDescription clusterSpec = new ClusterDescription();
