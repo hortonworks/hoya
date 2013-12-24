@@ -110,7 +110,8 @@ This is for demos only, otherwise you lose the clusters and their databases.
     hoya  create cl1 \
     --role workers 1 \
      --manager master:8032 --filesystem hdfs://master:9090 \
-     --zkhosts localhost --image hdfs://master:9090/hbase.tar
+     --zkhosts localhost --image hdfs://master:9090/hbase.tar \
+     --appconf file:////Users/hoya/Hadoop/configs/master/hbase
     
     # create the cluster
     

@@ -375,7 +375,9 @@ public class HoyaClient extends CompoundLaunchedService implements RunService,
                               PRINTF_E_ALREADY_EXISTS, clustername,
                               clusterSpecPath);
     }
-    
+    fs.mkdirs(origConfPath);
+    fs.mkdirs(generatedConfPath);
+
     Configuration conf = getConfig();
     // build up the initial cluster specification
     ClusterDescription clusterSpec = new ClusterDescription();
@@ -1092,7 +1094,6 @@ public class HoyaClient extends CompoundLaunchedService implements RunService,
    * Monitor the submitted application for reaching the requested state.
    * Will also report if the app reaches a later state (failed, killed, etc)
    * Kill application if duration!= null & time expires. 
-   * @param appId Application Id of application to be monitored
    * @param duration how long to wait -must be more than 0
    * @param desiredState desired state.
    * @return the application report -null on a timeout
@@ -1522,8 +1523,7 @@ public class HoyaClient extends CompoundLaunchedService implements RunService,
   /**
    * Implement flexing
    * @param clustername name of the cluster
-   * @param workers number of workers
-   * @param masters number of masters
+   * @param persist whether save the cluster specification or not
    * @return EXIT_SUCCESS if the #of nodes in a live cluster changed
    */
   public int flex(String clustername,
