@@ -21,6 +21,7 @@ package org.apache.hoya.tools;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
+import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IOUtils;
@@ -167,7 +168,8 @@ public class ConfigHelper {
   public Document parseConfiguration(FileSystem fs,
                                      Path path) throws
                                                 IOException {
-    int len = (int) fs.getLength(path);
+    FileStatus fileStatus = fs.getFileStatus(path);
+    int len = (int) fileStatus.getLen();
     byte[] data = new byte[len];
     FSDataInputStream in = fs.open(path);
     try {
@@ -206,7 +208,8 @@ public class ConfigHelper {
   public static Configuration loadConfiguration(FileSystem fs,
                                                 Path path) throws
                                                                    IOException {
-    int len = (int) fs.getLength(path);
+    FileStatus fileStatus = fs.getFileStatus(path);
+    int len = (int) fileStatus.getLen();
     byte[] data = new byte[len];
     FSDataInputStream in = fs.open(path);
     try {
