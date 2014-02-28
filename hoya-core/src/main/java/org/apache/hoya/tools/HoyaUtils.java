@@ -61,6 +61,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -71,6 +73,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Callable;
@@ -469,10 +472,10 @@ public final class HoyaUtils {
     builder.append(separator).append(
       "state: ").append(r.getYarnApplicationState());
     builder.append(separator).append("URL: ").append(r.getTrackingUrl());
-    builder.append(separator).append("Started ").append(new Date(r.getStartTime()).toGMTString());
+    builder.append(separator).append("Started ").append(toGMTString(r.getStartTime()));
     long finishTime = r.getFinishTime();
     if (finishTime>0) {
-      builder.append(separator).append("Finished ").append(new Date(finishTime).toGMTString());
+      builder.append(separator).append("Finished ").append(toGMTString(finishTime));
     }
     builder.append(separator).append("RPC :").append(r.getHost()).append(':').append(r.getRpcPort());
     String diagnostics = r.getDiagnostics();
@@ -1161,15 +1164,19 @@ public final class HoyaUtils {
   }
 
   /**
-   * Convert an epoch time to a GMT time. This
-   * uses the deprecated Date.toString() operation,
-   * so is in one place to reduce the number of deprecation warnings.
-   * @param time timestamp
-   * @return string value as ISO-9601
+   * Convert an epoch time to a GMT time.
+   *
+   * This uses a DateFormat in place of the deprecated Date.toGMTString()
+   * operation.
+   *
+   * @param time number of seconds since "the epoch"
+   * @return string representation of the date
    */
-  @SuppressWarnings({"CallToDateToString", "deprecation"})
   public static String toGMTString(long time) {
-    return new Date(time).toGMTString();
+    DateFormat gmtFormat = new SimpleDateFormat("d MMM yyyy hh:mm:ss z");
+    gmtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+
+    return gmtFormat.format(new Date(time));
   }
 
   /**

@@ -21,6 +21,7 @@ package org.apache.hoya.yarn.utils
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.hoya.tools.HoyaFileSystem
+import org.apache.hoya.tools.HoyaUtils
 import org.apache.hoya.yarn.HoyaTestBase
 import org.junit.Test
 import org.apache.hadoop.fs.FileSystem as HadoopFS
@@ -42,5 +43,15 @@ class TestMiscHoyaUtils extends HoyaTestBase {
     assert fs.exists(inst)
     hoyaFileSystem.purgeHoyaAppInstanceTempFiles(CLUSTER1)
     assert !fs.exists(inst)
+  }
+
+  @Test
+  public void testToGMTString() {
+    long timestamp = 123456789
+
+    String s1 = new Date(timestamp).toGMTString();
+    String s2 = HoyaUtils.toGMTString(timestamp)
+
+    assertEquals(s1, s2)
   }
 }
