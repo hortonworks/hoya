@@ -19,8 +19,6 @@
 package org.apache.hoya.yarn.params;
 
 import com.beust.jcommander.Parameter;
-import com.beust.jcommander.Parameters;
-import org.apache.hoya.yarn.HoyaActions;
 /*
 
 @Parameters(commandNames = {HoyaActions.ACTION_KILL_CONTAINER},

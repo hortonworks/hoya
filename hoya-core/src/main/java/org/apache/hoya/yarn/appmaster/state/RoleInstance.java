@@ -21,7 +21,6 @@ package org.apache.hoya.yarn.appmaster.state;
 import org.apache.hadoop.yarn.api.records.Container;
 import org.apache.hadoop.yarn.api.records.ContainerId;
 import org.apache.hadoop.yarn.api.records.NodeId;
-import org.apache.hoya.api.ClusterDescription;
 import org.apache.hoya.api.proto.Messages;
 import org.apache.hoya.tools.HoyaUtils;
 
@@ -48,7 +47,7 @@ public final class RoleInstance implements Cloneable {
   public String role;
   public int roleId;
   /**
-   * state from {@link ClusterDescription}
+   * state from {@link org.apache.hoya.api.ClusterDescription}
    */
   public int state;
 
