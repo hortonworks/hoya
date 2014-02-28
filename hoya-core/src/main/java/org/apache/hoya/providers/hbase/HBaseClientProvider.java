@@ -329,7 +329,7 @@ public class HBaseClientProvider extends AbstractProviderCore implements
         "zookeeper.jar",
         "htrace-core.jar",
       };
-    Class[] classes = {
+    Class<?>[] classes = {
       // hbase-common
       org.apache.hadoop.hbase.HConstants.class,
       // hbase-protocol

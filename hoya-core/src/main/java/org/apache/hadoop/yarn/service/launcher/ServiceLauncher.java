@@ -528,7 +528,7 @@ public class ServiceLauncher<S extends Service>
       Thread.setDefaultUncaughtExceptionHandler(
         new YarnUncaughtExceptionHandler());
 
-      ServiceLauncher serviceLauncher = new ServiceLauncher<Service>(serviceClassName);
+      ServiceLauncher<Service> serviceLauncher = new ServiceLauncher<Service>(serviceClassName);
       serviceLauncher.launchServiceAndExit(argsList);
     }
   }

@@ -44,6 +44,7 @@ import org.apache.hadoop.yarn.api.records.ContainerStatus;
 import org.apache.hadoop.yarn.api.records.FinalApplicationStatus;
 import org.apache.hadoop.yarn.api.records.NodeReport;
 import org.apache.hadoop.yarn.api.records.Resource;
+import org.apache.hadoop.yarn.client.api.AMRMClient;
 import org.apache.hadoop.yarn.client.api.async.AMRMClientAsync;
 import org.apache.hadoop.yarn.client.api.async.NMClientAsync;
 import org.apache.hadoop.yarn.client.api.async.impl.NMClientAsyncImpl;
@@ -166,7 +167,7 @@ public class HoyaAppMaster extends CompoundLaunchedService
   private YarnRPC yarnRPC;
 
   /** Handle to communicate with the Resource Manager*/
-  private AMRMClientAsync asyncRMClient;
+  private AMRMClientAsync<AMRMClient.ContainerRequest> asyncRMClient;
   
   private RMOperationHandler rmOperationHandler;
 
@@ -768,7 +769,7 @@ public class HoyaAppMaster extends CompoundLaunchedService
    return appState.getContainerDiagnosticInfo();
   }
 
-  public Object getProxy(Class protocol, InetSocketAddress addr) {
+  public Object getProxy(Class<?> protocol, InetSocketAddress addr) {
     return yarnRPC.getProxy(protocol, addr, getConfig());
   }
 

@@ -31,9 +31,9 @@ import org.slf4j.LoggerFactory;
 public class AsyncRMOperationHandler extends RMOperationHandler {
   protected static final Logger log =
     LoggerFactory.getLogger(AsyncRMOperationHandler.class);
-  private final AMRMClientAsync client;
+  private final AMRMClientAsync<AMRMClient.ContainerRequest> client;
 
-  public AsyncRMOperationHandler(AMRMClientAsync client) {
+  public AsyncRMOperationHandler(AMRMClientAsync<AMRMClient.ContainerRequest> client) {
     this.client = client;
   }
 

@@ -185,7 +185,7 @@ public final class HoyaUtils {
    * @throws IOException any IO problem, including the class not having a
    * classloader
    */
-  public static File findContainingJar(Class my_class) throws IOException {
+  public static File findContainingJar(Class<?> my_class) throws IOException {
     ClassLoader loader = my_class.getClassLoader();
     if (loader == null) {
       throw new IOException(
@@ -197,8 +197,8 @@ public final class HoyaUtils {
       throw new IOException("Unable to find resources for class " + my_class);
     }
 
-    for (Enumeration itr = urlEnumeration; itr.hasMoreElements(); ) {
-      URL url = (URL) itr.nextElement();
+    for (Enumeration<URL> itr = urlEnumeration; itr.hasMoreElements(); ) {
+      URL url = itr.nextElement();
       if ("jar".equals(url.getProtocol())) {
         String toReturn = url.getPath();
         if (toReturn.startsWith("file:")) {
@@ -400,7 +400,7 @@ public final class HoyaUtils {
    * @param c collection
    * @return a stringified list
    */
-  public static List<String> collectionToStringList(Collection c) {
+  public static List<String> collectionToStringList(Collection<?> c) {
     List<String> l = new ArrayList<String>(c.size());
     for (Object o : c) {
       l.add(o.toString());
@@ -408,7 +408,7 @@ public final class HoyaUtils {
     return l;
   }
 
-  public static String join(Collection collection, String separator) {
+  public static String join(Collection<?> collection, String separator) {
     StringBuilder b = new StringBuilder();
     for (Object o : collection) {
       b.append(o);
@@ -909,7 +909,7 @@ public final class HoyaUtils {
    */
   public static LocalResource putJar(Map<String, LocalResource> providerResources,
                               HoyaFileSystem hoyaFileSystem,
-                              Class clazz,
+                              Class<?> clazz,
                               Path tempPath,
                               String libdir,
                               String jarName

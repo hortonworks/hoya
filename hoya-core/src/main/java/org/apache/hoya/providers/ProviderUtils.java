@@ -80,7 +80,7 @@ public class ProviderUtils implements RoleKeys {
                                        Path tempPath,
                                        String libdir,
                                        String[] resources,
-                                       Class[] classes
+                                       Class<?>[] classes
                                       ) throws
                                         IOException,
                                         HoyaException {
@@ -93,7 +93,7 @@ public class ProviderUtils implements RoleKeys {
     int size = resources.length;
     for (int i = 0; i < size; i++) {
       String jarName = resources[i];
-      Class clazz = classes[i];
+      Class<?> clazz = classes[i];
       HoyaUtils.putJar(providerResources,
                        hoyaFileSystem,
                        clazz,
