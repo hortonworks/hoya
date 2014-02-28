@@ -49,14 +49,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.apache.hoya.HoyaKeys.*;
+
 /**
  * handles the setup of the Hoya AM.
  * This keeps aspects of role, cluster validation and Clusterspec setup
  * out of the core hoya client
  */
 public class HoyaAMClientProvider extends AbstractProviderCore implements
-                                                     HoyaKeys,
-                                                     ClientProvider {
+                                                               ClientProvider {
 
 
   protected static final Logger log =

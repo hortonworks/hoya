@@ -19,10 +19,10 @@
 package org.apache.hoya.exceptions;
 
 import org.apache.hadoop.yarn.service.launcher.ServiceLaunchException;
-import org.apache.hoya.HoyaExitCodes;
 
-public class HoyaException extends ServiceLaunchException implements
-                                                          HoyaExitCodes {
+import static org.apache.hoya.HoyaExitCodes.*;
+
+public class HoyaException extends ServiceLaunchException {
   public HoyaException() {
     super(EXIT_EXCEPTION_THROWN, "HoyaException");
   }

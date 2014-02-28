@@ -51,8 +51,8 @@ public class PortProbe extends Probe {
     PortProbe portProbe = new PortProbe(hostname,
                                         port,
                                         conf.getInt(
-                                          PORT_PROBE_CONNECT_TIMEOUT,
-                                          PORT_PROBE_CONNECT_TIMEOUT_DEFAULT),
+                                          MonitorKeys.PORT_PROBE_CONNECT_TIMEOUT,
+                                          MonitorKeys.PORT_PROBE_CONNECT_TIMEOUT_DEFAULT),
                                         "",
                                         conf);
 

@@ -62,7 +62,6 @@ import org.apache.hoya.HoyaKeys;
 import org.apache.hoya.api.ClusterDescription;
 import org.apache.hoya.api.HoyaClusterProtocol;
 import org.apache.hoya.api.OptionKeys;
-import org.apache.hoya.api.RoleKeys;
 import org.apache.hoya.api.StatusKeys;
 import org.apache.hoya.api.proto.HoyaClusterAPI;
 import org.apache.hoya.api.proto.Messages;
@@ -127,6 +126,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
+import static org.apache.hoya.HoyaExitCodes.*;
+import static org.apache.hoya.HoyaKeys.*;
+
 /**
  * This is the AM, which directly implements the callbacks from the AM and NM
  */
@@ -134,11 +136,8 @@ public class HoyaAppMaster extends CompoundLaunchedService
   implements AMRMClientAsync.CallbackHandler,
              NMClientAsync.CallbackHandler,
              RunService,
-             HoyaExitCodes,
-             HoyaKeys,
              HoyaClusterProtocol,
              ServiceStateChangeListener,
-             RoleKeys,
              EventCallback,
              ContainerStartOperation,
              ProbeReportHandler {

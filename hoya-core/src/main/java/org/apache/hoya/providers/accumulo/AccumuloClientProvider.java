@@ -53,12 +53,12 @@ import java.util.Set;
 import java.util.UUID;
 
 import static org.apache.hoya.providers.accumulo.AccumuloConfigFileOptions.INSTANCE_SECRET;
+import static org.apache.hoya.providers.accumulo.AccumuloKeys.*;
 
 /**
  * Client-side accumulo provider
  */
 public class AccumuloClientProvider extends AbstractProviderCore implements
-                                                       AccumuloKeys,
                                                        ClientProvider {
 
   protected static final Logger log =

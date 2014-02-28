@@ -19,17 +19,19 @@
 package org.apache.hoya.exceptions;
 
 
+import org.apache.hoya.HoyaExitCodes;
+
 /**
  * YARN cluster itself is in a bad state
  */
 public class BadClusterStateException extends HoyaException {
   public BadClusterStateException(String message,
                                   Object... args) {
-    super(EXIT_BAD_CLUSTER_STATE, message, args);
+    super(HoyaExitCodes.EXIT_BAD_CLUSTER_STATE, message, args);
   }
 
   public BadClusterStateException(Throwable throwable,
                                   String message, Object... args) {
-    super(EXIT_BAD_CLUSTER_STATE, throwable, message, args);
+    super(HoyaExitCodes.EXIT_BAD_CLUSTER_STATE, throwable, message, args);
   }
 }

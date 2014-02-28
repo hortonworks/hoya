@@ -22,7 +22,6 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.Abortable;
 import org.apache.hadoop.service.Service;
 import org.apache.hadoop.yarn.service.launcher.ExitCodeProvider;
-import org.apache.hoya.HoyaKeys;
 import org.apache.hoya.api.ClusterDescription;
 import org.apache.hoya.exceptions.BadCommandArgumentsException;
 import org.apache.hoya.exceptions.HoyaException;
@@ -53,7 +52,6 @@ public abstract class AbstractProviderService
                           extends SequenceService
                           implements
                             ProviderCore,
-                            HoyaKeys,
                             ProviderService {
   private static final Logger log =
     LoggerFactory.getLogger(AbstractProviderService.class);

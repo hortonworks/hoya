@@ -18,13 +18,15 @@
 
 package org.apache.hoya.exceptions;
 
+import org.apache.hoya.HoyaExitCodes;
+
 public class BadCommandArgumentsException extends HoyaException {
   public BadCommandArgumentsException(String s, Object... args) {
-    super(EXIT_COMMAND_ARGUMENT_ERROR, s, args);
+    super(HoyaExitCodes.EXIT_COMMAND_ARGUMENT_ERROR, s, args);
   }
 
   public BadCommandArgumentsException(Throwable throwable, String message,
                                       Object... args) {
-    super(EXIT_COMMAND_ARGUMENT_ERROR, throwable, message, args);
+    super(HoyaExitCodes.EXIT_COMMAND_ARGUMENT_ERROR, throwable, message, args);
   }
 }

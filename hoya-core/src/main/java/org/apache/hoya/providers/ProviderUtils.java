@@ -45,7 +45,7 @@ import java.util.Map;
  * this is a factoring out of methods handy for providers. It's bonded to a log at
  * construction time
  */
-public class ProviderUtils implements RoleKeys {
+public class ProviderUtils {
 
   protected final Logger log;
 

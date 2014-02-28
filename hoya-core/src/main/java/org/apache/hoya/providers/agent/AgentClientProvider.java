@@ -44,14 +44,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static org.apache.hoya.providers.agent.AgentKeys.*;
+
 /**
  * This class implements  the client-side aspects
  * of the agent deployer
  */
 public class AgentClientProvider extends AbstractProviderCore implements
-    AgentKeys,
-    HoyaKeys,
-    ClientProvider {
+                                                              ClientProvider {
 
 
   protected static final Logger log =

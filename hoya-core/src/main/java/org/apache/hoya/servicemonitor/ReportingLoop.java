@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * This is the monitor service
  */
-public final class ReportingLoop implements Runnable, ProbeReportHandler, MonitorKeys, Closeable {
+public final class ReportingLoop implements Runnable, ProbeReportHandler, Closeable {
   protected static final Logger log = LoggerFactory.getLogger(ReportingLoop.class);
   private final ProbeWorker worker;
   private final Thread workerThread;

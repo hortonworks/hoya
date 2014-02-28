@@ -50,14 +50,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static org.apache.hoya.providers.hbase.HBaseConfigFileOptions.*;
+
 /**
  * This class implements  the client-side aspects
  * of an HBase Cluster
  */
 public class HBaseClientProvider extends AbstractProviderCore implements
-                                                          HBaseKeys, HoyaKeys,
-                                                          ClientProvider,
-                                                          HBaseConfigFileOptions {
+                                                              ClientProvider {
 
 
 

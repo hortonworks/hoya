@@ -65,13 +65,14 @@ import org.apache.zookeeper.ZooKeeper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.apache.hoya.HoyaKeys.*;
+import static org.apache.hoya.providers.accumulo.AccumuloKeys.*;
+
 /**
  * Server-side accumulo provider
  */
 public class AccumuloProviderService extends AbstractProviderService implements
-                                                                     ProviderCore,
-                                                                     AccumuloKeys,
-                                                                     HoyaKeys {
+                                                                     ProviderCore {
 
   protected static final Logger log =
     LoggerFactory.getLogger(AccumuloClientProvider.class);

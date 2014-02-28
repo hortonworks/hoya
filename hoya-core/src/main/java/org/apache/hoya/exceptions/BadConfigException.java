@@ -18,17 +18,19 @@
 
 package org.apache.hoya.exceptions;
 
+import org.apache.hoya.HoyaExitCodes;
+
 /**
  * An exception to raise on a bad configuration
  */
 public class BadConfigException extends HoyaException {
 
   public BadConfigException(String s) {
-    super(EXIT_BAD_CONFIGURATION, s);
+    super(HoyaExitCodes.EXIT_BAD_CONFIGURATION, s);
   }
 
   public BadConfigException(String message, Object... args) {
-    super(EXIT_BAD_CONFIGURATION, message, args);
+    super(HoyaExitCodes.EXIT_BAD_CONFIGURATION, message, args);
   }
 
 }
