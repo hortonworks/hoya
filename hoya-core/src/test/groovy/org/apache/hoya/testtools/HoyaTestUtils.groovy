@@ -88,7 +88,7 @@ class HoyaTestUtils extends Assert {
   public static void assertListEquals(List left, List right) {
     assert left.size() == right.size();
     for (int i = 0; i < left.size(); i++) {
-      assert left[0] == right[0]
+      assert left[i] == right[i]
     }
   }
 
