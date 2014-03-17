@@ -20,7 +20,6 @@ package org.apache.hoya.providers.hoyaam;
 
 import com.beust.jcommander.JCommander;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.yarn.api.records.LocalResource;
 import org.apache.hadoop.yarn.api.records.Resource;
@@ -50,14 +49,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.apache.hoya.HoyaKeys.*;
+
 /**
  * handles the setup of the Hoya AM.
  * This keeps aspects of role, cluster validation and Clusterspec setup
  * out of the core hoya client
  */
 public class HoyaAMClientProvider extends AbstractProviderCore implements
-                                                     HoyaKeys,
-                                                     ClientProvider {
+                                                               ClientProvider {
 
 
   protected static final Logger log =

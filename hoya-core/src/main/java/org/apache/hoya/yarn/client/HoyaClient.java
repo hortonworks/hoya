@@ -59,7 +59,6 @@ import org.apache.hoya.api.proto.Messages;
 import org.apache.hoya.exceptions.BadClusterStateException;
 import org.apache.hoya.exceptions.BadCommandArgumentsException;
 import org.apache.hoya.exceptions.BadConfigException;
-import org.apache.hoya.exceptions.ErrorStrings;
 import org.apache.hoya.exceptions.HoyaException;
 import org.apache.hoya.exceptions.NoSuchNodeException;
 import org.apache.hoya.exceptions.UnknownClusterException;
@@ -110,14 +109,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import static org.apache.hoya.HoyaExitCodes.*;
+import static org.apache.hoya.HoyaKeys.*;
+import static org.apache.hoya.exceptions.ErrorStrings.*;
+
 /**
  * Client service for Hoya
  */
 
-public class HoyaClient extends CompoundLaunchedService implements RunService,
-                                                          HoyaExitCodes,
-                                                          HoyaKeys,
-                                                          ErrorStrings {
+public class HoyaClient extends CompoundLaunchedService implements RunService {
   private static final Logger log = LoggerFactory.getLogger(HoyaClient.class);
 
   public static final int ACCEPT_TIME = 60000;

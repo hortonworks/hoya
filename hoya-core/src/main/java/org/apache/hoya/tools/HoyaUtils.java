@@ -61,6 +61,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -71,10 +73,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -182,7 +183,7 @@ public final class HoyaUtils {
    * @throws IOException any IO problem, including the class not having a
    * classloader
    */
-  public static File findContainingJar(Class my_class) throws IOException {
+  public static File findContainingJar(Class<?> my_class) throws IOException {
     ClassLoader loader = my_class.getClassLoader();
     if (loader == null) {
       throw new IOException(
@@ -194,8 +195,8 @@ public final class HoyaUtils {
       throw new IOException("Unable to find resources for class " + my_class);
     }
 
-    for (Enumeration itr = urlEnumeration; itr.hasMoreElements(); ) {
-      URL url = (URL) itr.nextElement();
+    for (Enumeration<URL> itr = urlEnumeration; itr.hasMoreElements(); ) {
+      URL url = itr.nextElement();
       if ("jar".equals(url.getProtocol())) {
         String toReturn = url.getPath();
         if (toReturn.startsWith("file:")) {
@@ -397,7 +398,7 @@ public final class HoyaUtils {
    * @param c collection
    * @return a stringified list
    */
-  public static List<String> collectionToStringList(Collection c) {
+  public static List<String> collectionToStringList(Collection<?> c) {
     List<String> l = new ArrayList<String>(c.size());
     for (Object o : c) {
       l.add(o.toString());
@@ -405,7 +406,7 @@ public final class HoyaUtils {
     return l;
   }
 
-  public static String join(Collection collection, String separator) {
+  public static String join(Collection<?> collection, String separator) {
     StringBuilder b = new StringBuilder();
     for (Object o : collection) {
       b.append(o);
@@ -469,10 +470,10 @@ public final class HoyaUtils {
     builder.append(separator).append(
       "state: ").append(r.getYarnApplicationState());
     builder.append(separator).append("URL: ").append(r.getTrackingUrl());
-    builder.append(separator).append("Started ").append(new Date(r.getStartTime()).toGMTString());
+    builder.append(separator).append("Started ").append(toGMTString(r.getStartTime()));
     long finishTime = r.getFinishTime();
     if (finishTime>0) {
-      builder.append(separator).append("Finished ").append(new Date(finishTime).toGMTString());
+      builder.append(separator).append("Finished ").append(toGMTString(finishTime));
     }
     builder.append(separator).append("RPC :").append(r.getHost()).append(':').append(r.getRpcPort());
     String diagnostics = r.getDiagnostics();
@@ -906,7 +907,7 @@ public final class HoyaUtils {
    */
   public static LocalResource putJar(Map<String, LocalResource> providerResources,
                               HoyaFileSystem hoyaFileSystem,
-                              Class clazz,
+                              Class<?> clazz,
                               Path tempPath,
                               String libdir,
                               String jarName
@@ -1161,15 +1162,19 @@ public final class HoyaUtils {
   }
 
   /**
-   * Convert an epoch time to a GMT time. This
-   * uses the deprecated Date.toString() operation,
-   * so is in one place to reduce the number of deprecation warnings.
-   * @param time timestamp
-   * @return string value as ISO-9601
+   * Convert an epoch time to a GMT time.
+   *
+   * This uses a DateFormat in place of the deprecated Date.toGMTString()
+   * operation.
+   *
+   * @param time number of seconds since "the epoch"
+   * @return string representation of the date
    */
-  @SuppressWarnings({"CallToDateToString", "deprecation"})
   public static String toGMTString(long time) {
-    return new Date(time).toGMTString();
+    DateFormat gmtFormat = new SimpleDateFormat("d MMM yyyy hh:mm:ss z");
+    gmtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+
+    return gmtFormat.format(new Date(time));
   }
 
   /**

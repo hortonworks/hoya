@@ -17,12 +17,12 @@
 
 package org.apache.hoya.servicemonitor;
 
-import junit.framework.Assert;
-
 import org.apache.hadoop.conf.Configuration;
 import org.junit.Test;
 
-public class PortProbeTest extends Assert {
+import static org.junit.Assert.assertFalse;
+
+public class PortProbeTest {
   /**
    * Assert that a port probe failed if the port is closed
    * @throws Throwable

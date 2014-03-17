@@ -68,7 +68,7 @@ public class ClientArgs extends CommonArgs {
     super(args);
   }
 
-  public ClientArgs(Collection args) {
+  public ClientArgs(Collection<?> args) {
     super(args);
   }
 

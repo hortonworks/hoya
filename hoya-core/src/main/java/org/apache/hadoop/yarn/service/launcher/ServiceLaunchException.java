@@ -27,7 +27,7 @@ import org.apache.hadoop.yarn.exceptions.YarnException;
  * into a process exit code.
  */
 public class ServiceLaunchException extends YarnException
-  implements ExitCodeProvider, LauncherExitCodes {
+  implements ExitCodeProvider {
 
   private final int exitCode;
   

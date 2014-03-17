@@ -478,7 +478,7 @@ public class HoyaFileSystem {
    * @return the local resource ref
    * @throws java.io.IOException trouble copying to HDFS
    */
-  public LocalResource submitJarWithClass(Class clazz, Path tempPath, String subdir, String jarName)
+  public LocalResource submitJarWithClass(Class<?> clazz, Path tempPath, String subdir, String jarName)
           throws IOException, HoyaException {
     File localFile = HoyaUtils.findContainingJar(clazz);
     if (null == localFile) {

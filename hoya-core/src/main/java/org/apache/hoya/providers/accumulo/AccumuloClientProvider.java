@@ -21,7 +21,6 @@ package org.apache.hoya.providers.accumulo;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.CommonConfigurationKeys;
 import org.apache.hadoop.fs.CommonConfigurationKeysPublic;
-import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.yarn.api.records.LocalResource;
 import org.apache.hadoop.yarn.api.records.Resource;
@@ -54,12 +53,12 @@ import java.util.Set;
 import java.util.UUID;
 
 import static org.apache.hoya.providers.accumulo.AccumuloConfigFileOptions.INSTANCE_SECRET;
+import static org.apache.hoya.providers.accumulo.AccumuloKeys.*;
 
 /**
  * Client-side accumulo provider
  */
 public class AccumuloClientProvider extends AbstractProviderCore implements
-                                                       AccumuloKeys,
                                                        ClientProvider {
 
   protected static final Logger log =

@@ -37,6 +37,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static org.apache.hadoop.yarn.service.launcher.LauncherExitCodes.*;
+
 /**
  * A class to launch any service by name.
  * It is assumed that the service starts 
@@ -50,7 +52,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 @SuppressWarnings("UseOfSystemOutOrSystemErr")
 public class ServiceLauncher<S extends Service>
-  implements LauncherExitCodes, IrqHandler.Interrupted {
+  implements IrqHandler.Interrupted {
   private static final Log LOG = LogFactory.getLog(ServiceLauncher.class);
   protected static final int PRIORITY = 30;
 
@@ -528,7 +530,7 @@ public class ServiceLauncher<S extends Service>
       Thread.setDefaultUncaughtExceptionHandler(
         new YarnUncaughtExceptionHandler());
 
-      ServiceLauncher serviceLauncher = new ServiceLauncher<Service>(serviceClassName);
+      ServiceLauncher<Service> serviceLauncher = new ServiceLauncher<Service>(serviceClassName);
       serviceLauncher.launchServiceAndExit(argsList);
     }
   }

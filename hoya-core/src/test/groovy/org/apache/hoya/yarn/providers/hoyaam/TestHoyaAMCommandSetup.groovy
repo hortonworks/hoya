@@ -19,9 +19,7 @@
 package org.apache.hoya.yarn.providers.hoyaam
 
 import org.apache.hadoop.conf.Configuration
-import org.apache.hoya.HoyaKeys
 import org.apache.hoya.api.ClusterDescription
-import org.apache.hoya.api.RoleKeys
 import org.apache.hoya.providers.ProviderRole
 import org.apache.hoya.providers.hoyaam.HoyaAMClientProvider
 import org.apache.hoya.tools.ConfigHelper
@@ -30,7 +28,10 @@ import org.apache.hoya.yarn.HoyaTestBase
 import org.junit.Before
 import org.junit.Test
 
-class TestHoyaAMCommandSetup extends HoyaTestBase implements RoleKeys, HoyaKeys{
+import static org.apache.hoya.HoyaKeys.*
+import static org.apache.hoya.api.RoleKeys.*
+
+class TestHoyaAMCommandSetup extends HoyaTestBase {
   public static final int JVM_HEAP_INDEX = 2
   public static final int JVM_OPT_INDEX = JVM_HEAP_INDEX + 1
   private ClusterDescription clusterSpec

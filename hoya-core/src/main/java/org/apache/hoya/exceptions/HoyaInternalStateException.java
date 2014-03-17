@@ -18,17 +18,19 @@
 
 package org.apache.hoya.exceptions;
 
+import org.apache.hoya.HoyaExitCodes;
+
 public class HoyaInternalStateException extends HoyaException {
   public HoyaInternalStateException(String s) {
-    super(EXIT_INTERNAL_ERROR, s);
+    super(HoyaExitCodes.EXIT_INTERNAL_ERROR, s);
   }
 
   public HoyaInternalStateException(String s, Throwable throwable) {
-    super(EXIT_INTERNAL_ERROR, throwable, s);
+    super(HoyaExitCodes.EXIT_INTERNAL_ERROR, throwable, s);
   }
 
   public HoyaInternalStateException(String message,
                                     Object... args) {
-    super(EXIT_INTERNAL_ERROR, message, args);
+    super(HoyaExitCodes.EXIT_INTERNAL_ERROR, message, args);
   }
 }

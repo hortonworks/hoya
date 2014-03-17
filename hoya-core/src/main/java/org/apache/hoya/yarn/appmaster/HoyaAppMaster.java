@@ -44,6 +44,7 @@ import org.apache.hadoop.yarn.api.records.ContainerStatus;
 import org.apache.hadoop.yarn.api.records.FinalApplicationStatus;
 import org.apache.hadoop.yarn.api.records.NodeReport;
 import org.apache.hadoop.yarn.api.records.Resource;
+import org.apache.hadoop.yarn.client.api.AMRMClient;
 import org.apache.hadoop.yarn.client.api.async.AMRMClientAsync;
 import org.apache.hadoop.yarn.client.api.async.NMClientAsync;
 import org.apache.hadoop.yarn.client.api.async.impl.NMClientAsyncImpl;
@@ -61,7 +62,6 @@ import org.apache.hoya.HoyaKeys;
 import org.apache.hoya.api.ClusterDescription;
 import org.apache.hoya.api.HoyaClusterProtocol;
 import org.apache.hoya.api.OptionKeys;
-import org.apache.hoya.api.RoleKeys;
 import org.apache.hoya.api.StatusKeys;
 import org.apache.hoya.api.proto.HoyaClusterAPI;
 import org.apache.hoya.api.proto.Messages;
@@ -126,6 +126,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
+import static org.apache.hoya.HoyaExitCodes.*;
+import static org.apache.hoya.HoyaKeys.*;
+
 /**
  * This is the AM, which directly implements the callbacks from the AM and NM
  */
@@ -133,11 +136,8 @@ public class HoyaAppMaster extends CompoundLaunchedService
   implements AMRMClientAsync.CallbackHandler,
              NMClientAsync.CallbackHandler,
              RunService,
-             HoyaExitCodes,
-             HoyaKeys,
              HoyaClusterProtocol,
              ServiceStateChangeListener,
-             RoleKeys,
              EventCallback,
              ContainerStartOperation,
              ProbeReportHandler {
@@ -166,7 +166,7 @@ public class HoyaAppMaster extends CompoundLaunchedService
   private YarnRPC yarnRPC;
 
   /** Handle to communicate with the Resource Manager*/
-  private AMRMClientAsync asyncRMClient;
+  private AMRMClientAsync<AMRMClient.ContainerRequest> asyncRMClient;
   
   private RMOperationHandler rmOperationHandler;
 
@@ -775,7 +775,7 @@ public class HoyaAppMaster extends CompoundLaunchedService
    return appState.getContainerDiagnosticInfo();
   }
 
-  public Object getProxy(Class protocol, InetSocketAddress addr) {
+  public Object getProxy(Class<?> protocol, InetSocketAddress addr) {
     return yarnRPC.getProxy(protocol, addr, getConfig());
   }
 

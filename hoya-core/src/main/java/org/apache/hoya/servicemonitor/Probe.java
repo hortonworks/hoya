@@ -24,7 +24,7 @@ import java.io.IOException;
 /**
  * Base class of all probes.
  */
-public abstract class Probe implements MonitorKeys {
+public abstract class Probe {
 
   protected final Configuration conf;
   private String name;

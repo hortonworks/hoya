@@ -27,7 +27,6 @@ import org.junit.Test
 
 import static org.junit.Assert.assertEquals
 
-
 class TestHoyaFileSystem extends HoyaTestBase {
   private static Configuration defaultConfiguration() {
     new Configuration()
@@ -51,6 +50,20 @@ class TestHoyaFileSystem extends HoyaTestBase {
     Configuration configuration = createConfigurationWithKV(HoyaXmlConfKeys.KEY_BASE_HOYA_PATH, "/hoya/cluster")
     FileSystem fileSystem = FileSystem.get(configuration)
     assertEquals new HoyaFileSystem(fileSystem, configuration).getBaseHoyaPath(), new Path("/hoya/cluster")
+  }
+
+  @Test
+  public void testPurgeTempDir() throws Throwable {
+    String CLUSTER1 = "cluster1"
+
+    Configuration configuration = new Configuration()
+    FileSystem fs = FileSystem.get(new URI("file:///"), configuration)
+    HoyaFileSystem hoyaFileSystem = new HoyaFileSystem(fs, configuration)
+    Path inst = hoyaFileSystem.createHoyaAppInstanceTempPath(CLUSTER1, "001")
+
+    assertTrue(fs.exists(inst))
+    hoyaFileSystem.purgeHoyaAppInstanceTempFiles(CLUSTER1)
+    assertFalse(fs.exists(inst))
   }
 
 }

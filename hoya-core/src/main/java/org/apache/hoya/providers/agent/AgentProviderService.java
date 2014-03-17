@@ -46,14 +46,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.apache.hoya.providers.agent.AgentKeys.*;
+
 /**
  * This class implements the server-side aspects
  * of an agent deployment
  */
 public class AgentProviderService extends AbstractProviderService implements
-                                                                  ProviderCore,
-                                                                  AgentKeys,
-                                                                  HoyaKeys {
+                                                                  ProviderCore {
 
 
   protected static final Logger log =

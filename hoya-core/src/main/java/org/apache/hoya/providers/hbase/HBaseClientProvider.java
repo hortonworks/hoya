@@ -19,7 +19,6 @@
 package org.apache.hoya.providers.hbase;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.yarn.api.records.LocalResource;
@@ -51,14 +50,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static org.apache.hoya.providers.hbase.HBaseConfigFileOptions.*;
+
 /**
  * This class implements  the client-side aspects
  * of an HBase Cluster
  */
 public class HBaseClientProvider extends AbstractProviderCore implements
-                                                          HBaseKeys, HoyaKeys,
-                                                          ClientProvider,
-                                                          HBaseConfigFileOptions {
+                                                              ClientProvider {
 
 
 
@@ -329,7 +328,7 @@ public class HBaseClientProvider extends AbstractProviderCore implements
         "zookeeper.jar",
         "htrace-core.jar",
       };
-    Class[] classes = {
+    Class<?>[] classes = {
       // hbase-common
       org.apache.hadoop.hbase.HConstants.class,
       // hbase-protocol

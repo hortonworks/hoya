@@ -67,18 +67,18 @@ import org.apache.hoya.tools.ConfigHelper;
 import org.apache.hoya.tools.HoyaFileSystem;
 import org.apache.hoya.tools.HoyaUtils;
 import org.apache.hoya.yarn.service.EventCallback;
-import org.apache.zookeeper.KeeperException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.apache.hoya.HoyaKeys.*;
+import static org.apache.hoya.providers.hbase.HBaseKeys.*;
 
 /**
  * This class implements the server-side aspects
  * of an HBase Cluster
  */
-public class HBaseProviderService extends AbstractProviderService implements
-                                                                  ProviderCore,
-                                                                  HBaseKeys,
-                                                                  HoyaKeys {
+public class HBaseProviderService extends AbstractProviderService
+    implements ProviderCore {
 
   private MasterAddressTracker masterTracker = null;
 

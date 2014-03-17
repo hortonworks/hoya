@@ -44,7 +44,6 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -690,7 +689,8 @@ public class ClusterDescription implements Cloneable {
 
   /**
    * Set the time for an information (human, machine) timestamp pair of fields.
-   * The human time is the time in millis converted via the {@link Date} class.
+   * The human time is the time in millis converted via
+   * {@link HoyaUtils#toGMTString(long)}.
    * @param keyHumanTime name of human time key
    * @param keyMachineTime name of machine time
    * @param time timestamp

@@ -21,10 +21,10 @@ package org.apache.hoya.tools;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
+import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IOUtils;
-import org.apache.hoya.HoyaKeys;
 import org.apache.hoya.HoyaXmlConfKeys;
 import org.apache.hoya.exceptions.BadConfigException;
 import org.slf4j.Logger;
@@ -167,7 +167,8 @@ public class ConfigHelper {
   public Document parseConfiguration(FileSystem fs,
                                      Path path) throws
                                                 IOException {
-    int len = (int) fs.getLength(path);
+    FileStatus fileStatus = fs.getFileStatus(path);
+    int len = (int) fileStatus.getLen();
     byte[] data = new byte[len];
     FSDataInputStream in = fs.open(path);
     try {
@@ -206,7 +207,8 @@ public class ConfigHelper {
   public static Configuration loadConfiguration(FileSystem fs,
                                                 Path path) throws
                                                                    IOException {
-    int len = (int) fs.getLength(path);
+    FileStatus fileStatus = fs.getFileStatus(path);
+    int len = (int) fileStatus.getLen();
     byte[] data = new byte[len];
     FSDataInputStream in = fs.open(path);
     try {
@@ -306,8 +308,8 @@ public class ConfigHelper {
   /**
    * looks for the config under $confdir/$templateFilename; if not there
    * loads it from /conf/templateFile.
-   * The property {@link HoyaKeys#KEY_HOYA_TEMPLATE_ORIGIN} is set to the
-   * origin to help debug what's happening
+   * The property {@link org.apache.hoya.HoyaKeys#KEY_HOYA_TEMPLATE_ORIGIN} is
+   * set to the origin to help debug what's happening
    * @param systemConf system conf
    * @param confdir conf dir in FS
    * @param templateFilename filename in the confdir
@@ -329,8 +331,8 @@ public class ConfigHelper {
   /**
    * looks for the config under $confdir/$templateFilename; if not there
    * loads it from /conf/templateFile.
-   * The property {@link HoyaKeys#KEY_HOYA_TEMPLATE_ORIGIN} is set to the
-   * origin to help debug what's happening.
+   * The property {@link org.apache.hoya.HoyaKeys#KEY_HOYA_TEMPLATE_ORIGIN} is
+   * set to the origin to help debug what's happening.
    * @param fs Filesystem
    * @param templatePath HDFS path for template
    * @param fallbackResource resource to fall back on, or "" for no fallback

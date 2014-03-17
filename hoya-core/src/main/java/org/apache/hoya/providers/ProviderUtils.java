@@ -18,10 +18,7 @@
 
 package org.apache.hoya.providers;
 
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.fs.permission.FsPermission;
 import org.apache.hadoop.security.UserGroupInformation;
 import org.apache.hadoop.yarn.api.ApplicationConstants;
 import org.apache.hadoop.yarn.api.records.LocalResource;
@@ -48,7 +45,7 @@ import java.util.Map;
  * this is a factoring out of methods handy for providers. It's bonded to a log at
  * construction time
  */
-public class ProviderUtils implements RoleKeys {
+public class ProviderUtils {
 
   protected final Logger log;
 
@@ -80,7 +77,7 @@ public class ProviderUtils implements RoleKeys {
                                        Path tempPath,
                                        String libdir,
                                        String[] resources,
-                                       Class[] classes
+                                       Class<?>[] classes
                                       ) throws
                                         IOException,
                                         HoyaException {
@@ -93,7 +90,7 @@ public class ProviderUtils implements RoleKeys {
     int size = resources.length;
     for (int i = 0; i < size; i++) {
       String jarName = resources[i];
-      Class clazz = classes[i];
+      Class<?> clazz = classes[i];
       HoyaUtils.putJar(providerResources,
                        hoyaFileSystem,
                        clazz,

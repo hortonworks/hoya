@@ -23,7 +23,6 @@ import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hoya.HoyaXmlConfKeys;
 import org.apache.hoya.exceptions.BadCommandArgumentsException;
 import org.apache.hoya.exceptions.ErrorStrings;
 import org.apache.hoya.exceptions.HoyaException;
@@ -94,7 +93,7 @@ public abstract class CommonArgs extends ArgOps implements HoyaActions,
     commander = new JCommander(this);
   }
 
-  public CommonArgs(Collection args) {
+  public CommonArgs(Collection<?> args) {
     List<String> argsAsStrings = HoyaUtils.collectionToStringList(args);
     this.args = argsAsStrings.toArray(new String[argsAsStrings.size()]);
     commander = new JCommander(this);
